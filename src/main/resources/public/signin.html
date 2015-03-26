@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Signin</title>
+
+    <link href="signin.css" rel="stylesheet" type="text/css" />    
+    <link href="components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css" /> 
+
+    <script src="components/angular/angular.js" type="text/javascript"></script>
+    <script src="components/angular/angular-route.js" type="text/javascript"></script>
+    <script src="components/angular/ui-bootstrap-tpls-0.12.1.js" type="text/javascript"></script>
+
+    <script src="app/app.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+            angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
+    </script> 
+    
+  </head>
+
+  <body ng-app="main">
+    <div class="container" ng-controller="SigninCtrl">
+      <div class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <br/>
+        <div class="form-group">
+          <input type="text" ng-model="usernameText" class="form-control">
+          <br/>
+          <input type="text" ng-model="passwordText" class="form-control">
+          <br/>
+          <button type="button" class="btn btn-info" ng-click="login()">Login</button>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+  </body>
+</html>

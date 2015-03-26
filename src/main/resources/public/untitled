@@ -1,0 +1,7 @@
+<div ng-repeat="item in data">
+    <div class="row">
+        <div class="col-md-3">{{item.first}}</div>
+        <div class="col-md-3">{{item.last}}</div>
+        <div class="col-md-3">{{item.office}}</div>
+    </div>
+</div>
