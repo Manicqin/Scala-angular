@@ -10,7 +10,7 @@ import org.squeryl._
 import org.squeryl.SessionFactory
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.Table
-
+import com.typesafe.config.ConfigFactory
 import java.security.MessageDigest
 
 import argonaut._, Argonaut._
@@ -22,8 +22,9 @@ import java.sql.Timestamp
 
 object DbHandler{
 
-  abstract class TableBase
 
+  abstract class TableBase
+  val config = ConfigFactory.load()
   case class User(val first:String,
                     val last: String,
                     val office: String,
@@ -140,7 +141,11 @@ object DbHandler{
   def printView[T](db:org.squeryl.View[T]):Query[T] = from(db)(select(_))
 
   def connect(): Session = {
-    val conn = java.sql.DriverManager.getConnection("jdbc:postgresql://localhost:5432/web_backend","boaz","1qazXSW@3")
+    val user = config.getString("db.user")
+    val password = config.getString("db.password")
+    val url = config.getString("db.url")
+
+    val conn = java.sql.DriverManager.getConnection(url,user,password)
     val retVal = Session.create(conn, new PostgreSqlAdapter)
     return retVal
   }
